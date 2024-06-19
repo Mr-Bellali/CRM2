@@ -1,0 +1,38 @@
+.sidebar {
+    width: 125px;
+    height: 100vh;
+    background-color: #F3EBE5;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .logo-container {
+    height: 33%;
+  }
+  
+  .button-container {
+    height: 33%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .sidebar-button {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .sidebar-button.active {
+    background-color: black;
+  }
+  
