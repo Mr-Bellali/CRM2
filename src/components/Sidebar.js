@@ -10,7 +10,7 @@ class Sidebar extends Component {
     return (
       <nav className="sidebar">
         <div className="logo-container">
-          <img src="logo.png" alt="Logo" />
+          <img src="logo.png" alt="Logo" className="logo"/>
         </div>
         <div className="button-container">
           <button
