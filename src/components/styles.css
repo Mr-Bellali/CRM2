@@ -51,6 +51,7 @@
 .navbar {
   display: flex;
   height: 70px;
+  
    
 }
 
@@ -193,6 +194,8 @@
     border-radius: 4px;
     border: none;
     cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
   }
   
   .btn:hover,
@@ -266,7 +269,6 @@
 
   .dropdown {
     margin: 1rem auto;
-    position: relative;
   }
 
   .dropdown-title {
@@ -342,6 +344,35 @@
   .normal {
     transform: rotate(0);
     transition: all 400ms ease-in-out;
+  }
+
+
+  /* modal styling */
+
+  .modal {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .modal-content{
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #f3ebe5;
+    padding: 32px;
+    border-radius: 8px;
+    max-width: 800px;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
   }
 
   
@@ -424,82 +455,59 @@
 
 /* Mobile responsiveness */
 @media (max-width: 768px) {
-    .addfacture-container {
-        padding: 16px;
-        height: auto;
-        max-width: 100%;
-        box-shadow: none;
-    }
-
-    .addarticle-container {
-        padding: 16px;
-        height: auto;
-        max-width: 100%;
-        margin-left: 0;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .add-article-form-group,
-    .actions {
-        width: 100%;
-        justify-content: center;
-    }
-
-    .add-article-form-control,
-    .add-facture-form-control {
-        max-width: 100%;
-    }
-
-    .btn,
-    .btn-outline,
-    .add-article-btn {
-        width: 100%;
-        text-align: center;
-        margin: 8px 0;
-    }
-}
-
-
-/* Mobile responsiveness */
-@media (max-width: 768px) {
   .addfacture-container {
-      padding: 16px;
-      height: auto;
-      max-width: 100%;
-      box-shadow: none;
-      width: 100%;
-      margin: 0;
-      border-radius: 0;
+    padding: 16px;
+    height: 1000vh;
+    max-width: 100%;
+    box-shadow: none;
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+    overflow: hidden;
   }
 
   .addarticle-container {
-      padding: 16px;
-      height: auto;
-      max-width: 100%;
-      margin-left: 0;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      border-radius: 0;
+    padding: 16px;
+    height: 1000vh;
+    max-width: 100%;
+    margin-left: 0;
+    width: 100%;
+    border-radius: 0;
+    margin-top: 10px;
+  }
+
+  .add-article-form-wrapper {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
   }
 
   .add-article-form-group,
   .actions {
-      width: 100%;
-      justify-content: center;
+    width: 100%;
+    justify-content: center;
   }
 
   .add-article-form-control,
   .add-facture-form-control {
-      max-width: 100%;
+    max-width: 100%;
   }
 
   .btn,
   .btn-outline,
   .add-article-btn {
-      width: 100%;
-      text-align: center;
-      margin: 8px 0;
+    width: 100%;
+    text-align: center;
+    margin: 8px 0;
+  }
+
+  .add-article-form-group {
+    width: 100%;
+    padding: 0 10px;
+    box-sizing: border-box;
+  }
+
+  .input-fields-container {
+    width: 100%;
   }
 }
