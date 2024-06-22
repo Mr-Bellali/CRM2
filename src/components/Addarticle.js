@@ -1,13 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import "./styles.css";
 import RemoveRoundedIcon from "@mui/icons-material/RemoveRounded";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 
-const AddArticle = () => {
-  const [inputFields, setInputFields] = useState([
-    { Article: "", Quantity: "", Prix: "", Remise: "", Montant: "", disabled: false },
-  ]);
-
+const AddArticle = ({ inputFields, setInputFields }) => {
   const handleInputChange = (index, event) => {
     const values = [...inputFields];
     values[index][event.target.name] = event.target.value;
@@ -46,13 +42,20 @@ const AddArticle = () => {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("input Fields: ", inputFields);
+  const handleRemoveFields = (index) => {
+    const values = [...inputFields];
+    if (index === 0) {
+      // If the first field is being "removed", clear it instead and enable it
+      values[0] = { Article: "", Quantity: "", Prix: "", Remise: "", Montant: "", disabled: false };
+    } else {
+      values.splice(index, 1);
+    }
+    setInputFields(values);
+    console.log("Updated fields after removal: ", values);
   };
 
   return (
-    <form className="addarticle-container" onSubmit={handleSubmit}>
+    <form className="addarticle-container">
       {inputFields.map((inputField, index) => (
         <div key={index} className="input-fields-container">
           <div className="add-article-form-wrapper">
@@ -135,7 +138,12 @@ const AddArticle = () => {
               </button>
             </div>
             <div className="add-article-form-group">
-              <button className="remove-article-btn" type="button">
+              <button
+                className="remove-article-btn"
+                type="button"
+                onClick={() => handleRemoveFields(index)}
+                disabled={index === 0 && !inputFields[index].disabled}
+              >
                 <RemoveRoundedIcon
                   style={{
                     fontSize: 20,

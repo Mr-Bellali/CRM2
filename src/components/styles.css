@@ -238,6 +238,30 @@
     text-align: center;
   }
 
+  ul {
+    list-style-type: none; 
+    padding: 0; 
+  }
+  
+  li {
+    margin-bottom: 10px; 
+    padding: 10px; 
+    background-color: #f0f0f0; 
+    border-radius: 5px; 
+  }
+  
+  li strong {
+    font-weight: bold; 
+    margin-right: 5px; 
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
+
   /* addarticle's styling */
 
   .addarticle-container {

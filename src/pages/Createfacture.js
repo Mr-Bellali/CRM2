@@ -1,17 +1,19 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import Addfacture from "../components/Addfacture";
 import './styles.css';
 import Addarticle from '../components/Addarticle';
 
-class Createfacture extends Component {
-  render() {
-    return (
-      <section className="createfacture-section">
-        <Addfacture />
-        <Addarticle />
-      </section>
-    );
-  }
-}
+const Createfacture = () => {
+  const [inputFields, setInputFields] = useState([
+    { Article: "", Quantity: "", Prix: "", Remise: "", Montant: "", disabled: false },
+  ]);
+
+  return (
+    <section className="createfacture-section">
+      <Addfacture inputFields={inputFields} />
+      <Addarticle inputFields={inputFields} setInputFields={setInputFields} />
+    </section>
+  );
+};
 
 export default Createfacture;
