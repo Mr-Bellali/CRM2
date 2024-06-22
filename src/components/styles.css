@@ -247,11 +247,8 @@
     border-radius: 8px;
     max-width: 800px;
     margin-left: 20px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: flex-start;
     height: 86vh;
+    overflow-y: auto;
   }
   
   .input-fields-container {
