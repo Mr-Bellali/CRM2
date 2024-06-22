@@ -16,7 +16,6 @@ const AddArticle = ({ inputFields, setInputFields }) => {
 
     setInputFields(values);
 
-    // Check if all fields are filled and log the entire array of input fields
     const allFieldsFilled = Object.values(values[index]).slice(0, -1).every(
       (field) => field !== ""
     );
@@ -45,7 +44,6 @@ const AddArticle = ({ inputFields, setInputFields }) => {
   const handleRemoveFields = (index) => {
     const values = [...inputFields];
     if (index === 0) {
-      // If the first field is being "removed", clear it instead and enable it
       values[0] = { Article: "", Quantity: "", Prix: "", Remise: "", Montant: "", disabled: false };
     } else {
       values.splice(index, 1);

@@ -1,31 +1,35 @@
 import React, { Component } from 'react';
 import './styles.css';
+import Dropdown from './Dropdown';
 
 class Addfacture extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false,
-      errorMessage: '', // State for error message
+      idFacture: '',
+      dateFacture: '',
+      selectedClient: '',
+      errorMessage: '',
     };
 
-    this.handleClickOpen = this.handleClickOpen.bind(this);
-    this.handleClose = this.handleClose.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.handleClientSelect = this.handleClientSelect.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  handleClickOpen() {
-    this.setState({ open: true });
+  handleInputChange(event) {
+    this.setState({
+      [event.target.id]: event.target.value,
+    });
   }
 
-  handleClose() {
-    this.setState({ open: false });
+  handleClientSelect(client) {
+    this.setState({ selectedClient: client });
   }
 
   handleFormSubmit(event) {
     event.preventDefault();
-  
-    // Check if there are articles added and validate each article
+
     const validArticles = this.props.inputFields.every(inputField => (
       inputField.Article.trim() !== '' &&
       inputField.Quantity.trim() !== '' &&
@@ -33,16 +37,14 @@ class Addfacture extends Component {
       inputField.Remise.trim() !== '' &&
       inputField.Montant.trim() !== ''
     ));
-  
+
     if (!validArticles) {
-      alert('Please fill out all fields for the articles.');
+      this.setState({ errorMessage: 'Please fill out all fields for the articles.' });
       return;
     }
-  
-    const idFacture = event.target.elements.idFacture.value;
-    const dateFacture = event.target.elements.dateFacture.value;
-    const factureA = event.target.elements.factureA.value;
-  
+
+    const { idFacture, dateFacture, selectedClient } = this.state;
+
     let existingFactureData;
     try {
       existingFactureData = JSON.parse(localStorage.getItem("factureData"));
@@ -52,32 +54,33 @@ class Addfacture extends Component {
     } catch (error) {
       existingFactureData = [];
     }
-  
+
     const newFacture = {
       idFacture,
       dateFacture,
-      factureA,
-      articles: this.props.inputFields, // Add articles to the new facture
+      factureA: selectedClient,
+      articles: this.props.inputFields,
     };
-  
+
     const idExists = existingFactureData.some(
       (EX) => EX.idFacture === newFacture.idFacture
     );
-  
+
     if (idExists) {
       console.log(`id ${newFacture.idFacture} already exists, try another one`);
     } else {
       existingFactureData.push(newFacture);
       localStorage.setItem("factureData", JSON.stringify(existingFactureData));
       alert("Facture saved to localStorage!");
-  
-      event.target.elements.idFacture.value = '';
-      event.target.elements.dateFacture.value = '';
-      event.target.elements.factureA.value = '';
+
+      this.setState({
+        idFacture: '',
+        dateFacture: '',
+        selectedClient: '',
+        errorMessage: '',
+      });
     }
   }
-  
-  
 
   render() {
     return (
@@ -87,19 +90,23 @@ class Addfacture extends Component {
         <form onSubmit={this.handleFormSubmit}>
           <div className="add-facture-form-group">
             <label htmlFor="idFacture">id Facture</label>
-            <input type="text" id="idFacture" className="add-facture-form-control" />
+            <input
+              type="text"
+              id="idFacture"
+              className="add-facture-form-control"
+              value={this.state.idFacture}
+              onChange={this.handleInputChange}
+            />
           </div>
           <div className="add-facture-form-group">
             <label htmlFor="dateFacture">Date facture</label>
-            <input type="date" id="dateFacture" className="add-facture-form-control" />
-          </div>
-          <div className="add-facture-form-group">
-            <label htmlFor="factureA">Facture a</label>
-            <select id="factureA" className="add-facture-form-control">
-              <option value="">Select</option>
-              <option value="societe A">societe A</option>
-              <option value="societe B">societe B</option>
-            </select>
+            <input
+              type="date"
+              id="dateFacture"
+              className="add-facture-form-control"
+              value={this.state.dateFacture}
+              onChange={this.handleInputChange}
+            />
           </div>
           <div className="add-facture-articles-container">
             <h3>Articles</h3>
@@ -110,6 +117,10 @@ class Addfacture extends Component {
                 </li>
               ))}
             </ul>
+          </div>
+          <div className="add-facture-form-group">
+            <label htmlFor="factureA">Facture a</label>
+            <Dropdown onSelectClient={this.handleClientSelect} />
           </div>
           <div className="add-facture-button-container">
             <button type="submit" className="btn">
