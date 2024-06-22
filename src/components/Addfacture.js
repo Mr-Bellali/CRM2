@@ -89,26 +89,6 @@ class Addfacture extends Component {
             </button>
           </div>
         </form>
-
-        <div className="actions">
-          <button onClick={this.handleClickOpen} className="btn btn-outline">
-            Ajouter articles
-          </button>
-        </div>
-
-        {this.state.open && (
-          <div className="dialog">
-            <div className="dialog-content">
-              <h2>Ajouter Article</h2>
-              <Addarticle />
-              <div className="dialog-actions">
-                <button onClick={this.handleClose} className="btn">
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     );
   }
