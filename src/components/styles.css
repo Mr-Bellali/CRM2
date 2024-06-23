@@ -43,7 +43,6 @@
   background-color: black;
 }
 
-/* Media query for mobile */
 
 /* navbar's styling */
 
@@ -77,6 +76,7 @@
   .container {
     width: 100%;
     margin: 0 auto;
+    
   }
   
   .header-container {
@@ -90,22 +90,26 @@
     padding-top: 10px;
     padding-left: 10px;
     padding-right: 10px;
+    
   }
   
   .header-item {
     width: 33.3333%;
+    
   }
   
   .hr-line {
     height: 2px;
     background-color: black;
     margin: 0 0.5rem;
+    
   }
   
   .table {
     min-width: 100%;
     background-color: #F3EBE5;
     border-radius: 0.5rem;
+    
   }
   
   .table th, .table td {
@@ -143,7 +147,77 @@
     border-radius: 0.5rem;
     outline: none;
   }
+
+  .tablefacture-details-btn {
+    font-size: 16px;
+    font-weight: 600;
+    border: 2px solid #006769;
+    border-radius: 5px;
+    color: #006769;
+    background: none;
+    padding: 3px;
+    cursor: pointer;
+  }
   
+  /* facture styling */
+  .facture-container {
+    font-family: Arial, sans-serif;
+    max-width: 100%;
+    margin: auto;
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+.icon-placeholder {
+    width: 24px;
+    height: 24px;
+}
+
+.client-info p {
+    margin-top: 5px;
+    font-size: 0.9em;
+}
+
+.facture-table {
+    width: 100%;
+    margin-top: 40px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dotted #ccc;
+    padding: 5px 0;
+}
+
+.row.total {
+    border-top: 1px solid #ccc;
+    font-weight: bold;
+    padding-top: 10px;
+}
+
+.col {
+    flex: 1;
+    text-align: left;
+}
+
+.col:last-child {
+    text-align: right;
+}
+
   /* add facture styling */
 
   

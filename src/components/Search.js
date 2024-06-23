@@ -11,6 +11,7 @@ class Search extends Component {
           type="text"
           className="search-input"
           placeholder="Rechercher..."
+          onChange={this.props.onSearchChange}
         />
       </div>
     );

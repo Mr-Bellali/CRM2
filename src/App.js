@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import "./App.css";
 import Sidebar from "./components/Sidebar";
-import Createfacture from "./pages/Createfacture";
 import Navbar from "./components/Navbar";
+import Createfacture from "./pages/Createfacture";
+import Listfacture from "./pages/Listfacture"; 
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeButton: 1,
+      activeButton: 1, 
       isMobile: window.innerWidth <= 768,
     };
   }
@@ -48,7 +49,7 @@ class App extends Component {
           />
         )}
         <main className="main-content">
-          <Createfacture />
+          {activeButton === 1 ? <Listfacture /> : <Createfacture />}
         </main>
       </div>
     );

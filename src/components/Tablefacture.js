@@ -4,21 +4,74 @@ import Search from './Search';
 import './styles.css';
 
 class Tablefacture extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      sortAscending: true,
+      searchQuery: '',
+    };
+  }
+
+  handleSortToggle = () => {
+    this.setState((prevState) => ({
+      sortAscending: !prevState.sortAscending,
+    }));
+  };
+
+  handleSearchChange = (event) => {
+    this.setState({ searchQuery: event.target.value });
+  };
+
+  handleDetailsClick = (facture) => {
+    this.props.onSelectFacture(facture);
+  };
+
   render() {
-    const data = [
-      { id: 1, client: 'Client A', montantHT: 100, montantTVA: 20, montantTTC: 120, details: 'Detail A' },
-      { id: 2, client: 'Client B', montantHT: 200, montantTVA: 40, montantTTC: 240, details: 'Detail B' },
-      { id: 3, client: 'Client C', montantHT: 300, montantTVA: 60, montantTTC: 360, details: 'Detail C' },
-    ];
+    const facturesData = JSON.parse(localStorage.getItem("factureData")) || [];
+
+    let data = facturesData.map((facture) => {
+      const montantHT = facture.articles.reduce((sum, article) => sum + parseFloat(article.Montant), 0);
+      const montantTVA = montantHT * 0.2;
+      const montantTTC = montantHT + montantTVA;
+
+      return {
+        id: facture.idFacture,
+        client: facture.factureA,
+        montantHT: montantHT.toFixed(2),
+        montantTVA: montantTVA.toFixed(2),
+        montantTTC: montantTTC.toFixed(2),
+        articles: facture.articles,
+      };
+    });
+
+    const { sortAscending, searchQuery } = this.state;
+
+    if (searchQuery) {
+      data = data.filter((item) =>
+        item.client.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.montantHT.includes(searchQuery) ||
+        item.montantTVA.includes(searchQuery) ||
+        item.montantTTC.includes(searchQuery)
+      );
+    }
+
+    data.sort((a, b) => {
+      const comparison = a.client.localeCompare(b.client);
+      return sortAscending ? comparison : -comparison;
+    });
 
     return (
       <div className="container">
         <div className='header-container'>
           <div className='header-item'>
-            <SwapVertRoundedIcon className="ml-4" />
+            <SwapVertRoundedIcon
+              className="ml-4"
+              style={{ cursor: 'pointer' }}
+              onClick={this.handleSortToggle}
+            />
           </div>
           <div className='header-item'>
-            <Search />
+            <Search onSearchChange={this.handleSearchChange} />
           </div>
           <div className='header-item'></div>
         </div>
@@ -36,13 +89,15 @@ class Tablefacture extends Component {
           </thead>
           <tbody>
             {data.map((item, index) => (
-              <tr key={item.id}>
+              <tr key={item.id} onClick={() => this.handleDetailsClick(item)}>
                 <td>{index + 1}</td>
                 <td>{item.client}</td>
                 <td>{item.montantHT} €</td>
                 <td>{item.montantTVA} €</td>
                 <td>{item.montantTTC} €</td>
-                <td>{item.details}</td>
+                <td>
+                  <button className='tablefacture-details-btn' onClick={(e) => e.stopPropagation()}>Details</button>
+                </td>
               </tr>
             ))}
           </tbody>

@@ -11,24 +11,30 @@
   .inner-container {
     width: 100%;
     height: 100%;
-    margin-left: 1rem;
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
   }
   
   .left-panel {
-    width: 66.6667%;
+    width: 60%;
     background-color: #F3EBE5;
-    height: 100%;
+    height: 94vh;
     margin-right: 0.5rem;
     border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
   }
   
   .right-panel {
     width: 33.3333%;
-    background-color: #60A5FA;
-    height: 100%;
+    background-color: #F3EBE5;
+    height: 94vh;
     margin-left: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+
   }
   
 
