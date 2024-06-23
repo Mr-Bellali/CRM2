@@ -63,17 +63,17 @@ class Tablefacture extends Component {
     return (
       <div className="container">
         <div className='header-container'>
-          <div className='header-item'>
+          <div className='header-item-1'>
             <SwapVertRoundedIcon
               className="ml-4"
               style={{ cursor: 'pointer' }}
               onClick={this.handleSortToggle}
             />
           </div>
-          <div className='header-item'>
+          <div className='header-item-2'>
             <Search onSearchChange={this.handleSearchChange} />
           </div>
-          <div className='header-item'></div>
+          
         </div>
         <hr className="hr-line" />
         <table className="table">
@@ -96,7 +96,7 @@ class Tablefacture extends Component {
                 <td>{item.montantTVA} €</td>
                 <td>{item.montantTTC} €</td>
                 <td>
-                  <button className='tablefacture-details-btn' onClick={(e) => e.stopPropagation()}>Details</button>
+                  <button className='tablefacture-details-btn'>Details</button>
                 </td>
               </tr>
             ))}
